@@ -125,9 +125,8 @@ jobs:
             dch --package pywebdriver --newversion $(date +%Y%m%d) --create -m "Created by CI"
             debuild
             mv ../pywebdriver_$(date +%Y%m%d)_armhf.deb /artifacts
-      - name: Test build
       - uses: uraimo/run-on-arch-action@2
-        name: Build
+        name: Test build
         with:
           arch: armv7
           distro: bullseye
