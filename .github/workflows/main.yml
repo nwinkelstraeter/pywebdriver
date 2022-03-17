@@ -142,5 +142,3 @@ jobs:
           #        with:
           #          files: |
           #            ../pywebdriver_bullseye_armhf.deb
-        env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
