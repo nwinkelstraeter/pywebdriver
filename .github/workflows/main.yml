@@ -134,10 +134,10 @@ jobs:
             --volume "${PWD}/artifacts:/artifacts"
           run: |
             mv /artifacts/pywebdriver_$(date +%Y%m%d)_armhf.deb pywebdriver_bullseye_armhf.deb
-            sudo dpkg -i pywebdriver_bullseye_armhf.deb
-            sh debian/replace_snakeoil_mkcert.sh
-            sudo journalctl -u pywebdriver
-            sudo service pywebdriver status
+            dpkg -i pywebdriver_bullseye_armhf.deb
+            sh debian/replace_snakeoil_mkcert.sh arm
+            journalctl -u pywebdriver
+            service pywebdriver status
           #      - name: Release
           #        uses: softprops/action-gh-release@v1
           #        if: startsWith(github.ref, 'refs/tags/')
