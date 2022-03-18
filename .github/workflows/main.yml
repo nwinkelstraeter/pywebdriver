@@ -121,6 +121,7 @@ jobs:
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
           install: |
+            apt update --yes
             apt --yes install libnss3-tools libcups2-dev cups devscripts debhelper dh-python dh-virtualenv python3-wheel python3-setuptools python3-venv libmtp-dev libffi-dev fakeroot python3-distutils python3-pip python3-simplejson python3-flask-babel python3-usb python3-serial python3-netifaces python3-cups python3-pillow python3-flask-cors
           run: |
             mkdir -p build
@@ -136,6 +137,7 @@ jobs:
             --volume "${PWD}/artifacts:/artifacts"
           githubToken: ${{ github.token }}
           install: |
+            apt update --yes
             apt --yes install libnss3-tools libcups2-dev cups devscripts debhelper dh-python dh-virtualenv python3-wheel python3-setuptools python3-venv libmtp-dev libffi-dev fakeroot python3-distutils python3-pip python3-simplejson python3-flask-babel python3-usb python3-serial python3-netifaces python3-cups python3-pillow python3-flask-cors
           run: |
             mv /artifacts/pywebdriver_$(date +%Y%m%d)_armhf.deb pywebdriver_bullseye_armhf.deb
