@@ -130,8 +130,10 @@ jobs:
         with:
           arch: armv7
           distro: bullseye
+          dockerRunArgs: |
+            --volume "${PWD}/artifacts:/artifacts"
           run: |
-            mv pywebdriver_$(date +%Y%m%d)_armhf.deb pywebdriver_bullseye_armhf.deb
+            mv /artifacts/pywebdriver_$(date +%Y%m%d)_armhf.deb pywebdriver_bullseye_armhf.deb
             sudo dpkg -i pywebdriver_bullseye_armhf.deb
             sh debian/replace_snakeoil_mkcert.sh
             sudo journalctl -u pywebdriver
