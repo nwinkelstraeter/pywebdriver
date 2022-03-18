@@ -112,15 +112,17 @@ jobs:
         with:
           arch: armv7
           distro: bullseye
+          githubToken: ${{ github.token }}
+
           # Create an artifacts directory
           setup: |
             mkdir -p "${PWD}/artifacts"
           # Mount the artifacts directory as /artifacts in the container
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
-          run: |
-            apt --yes update
+          install: |
             apt --yes install libnss3-tools libcups2-dev cups devscripts debhelper dh-python dh-virtualenv python3-wheel python3-setuptools python3-venv libmtp-dev libffi-dev fakeroot python3-distutils python3-pip python3-simplejson python3-flask-babel python3-usb python3-serial python3-netifaces python3-cups python3-pillow python3-flask-cors
+          run: |
             mkdir -p build
             dch --package pywebdriver --newversion $(date +%Y%m%d) --create -m "Created by CI"
             debuild
@@ -132,6 +134,9 @@ jobs:
           distro: bullseye
           dockerRunArgs: |
             --volume "${PWD}/artifacts:/artifacts"
+          githubToken: ${{ github.token }}
+          install: |
+            apt --yes install libnss3-tools libcups2-dev cups devscripts debhelper dh-python dh-virtualenv python3-wheel python3-setuptools python3-venv libmtp-dev libffi-dev fakeroot python3-distutils python3-pip python3-simplejson python3-flask-babel python3-usb python3-serial python3-netifaces python3-cups python3-pillow python3-flask-cors
           run: |
             mv /artifacts/pywebdriver_$(date +%Y%m%d)_armhf.deb pywebdriver_bullseye_armhf.deb
             dpkg -i pywebdriver_bullseye_armhf.deb
